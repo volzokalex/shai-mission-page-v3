@@ -303,6 +303,10 @@ body {
   object-fit: contain;
   background: #0f0c0a;
 }
+/* Mobile: fill block, crop excess — no black bars in reels format */
+@media (max-width: 500px) {
+  .reel-slide.video .reel-video { object-fit: cover; }
+}
 .reel-slide.video .play-btn {
   width: 56px;
   height: 56px;
