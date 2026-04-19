@@ -60,7 +60,7 @@
   --radius-lg: 24px;
 
   --shadow-chip-stack: 0 5px 0 0 #E0DDD7, inset 0 1px 0 rgba(255,255,255,1);
-  --shadow-cta-stack:  0 6px 0 0 #A04A00, 0 14px 30px -8px rgba(236,110,0,.35);
+  --shadow-cta-stack:  0 6px 0 0 #A04A00;
 
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
@@ -301,9 +301,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 3px 0 0 var(--primary-700),
-    0 6px 14px -4px rgba(236,110,0,0.45);
+  box-shadow: 0 3px 0 0 var(--primary-700);
   z-index: 1;
 }
 .reel-slide.video .play-btn svg {
@@ -347,7 +345,6 @@ body {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 0.22s, box-shadow 0.22s, transform 0.22s, width 0.22s;
   /* Inactive: recessed "hole" look */
   background: rgba(0, 0, 0, 0.45);
   box-shadow:
@@ -1035,12 +1032,12 @@ body {
 
 .sticky-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 7px 0 0 var(--primary-700), 0 16px 34px -8px rgba(236,110,0,.45);
+  box-shadow: 0 7px 0 0 var(--primary-700);
 }
 
 .sticky-cta:active {
   transform: translateY(4px);
-  box-shadow: 0 2px 0 0 var(--primary-700), 0 6px 18px -6px rgba(236,110,0,.35);
+  box-shadow: 0 2px 0 0 var(--primary-700);
 }
 
 .sticky-cta .arrow { width: 18px; height: 18px; }
