@@ -83,6 +83,11 @@
   :root { --hero-full: 310px; }
 }
 
+/* Mobile: hero matches video 9:16 ratio so video fits fully with no black bars */
+@media (max-width: 500px) {
+  :root { --hero-full: calc(100vw * 16 / 9); }
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
 
 html, body {
