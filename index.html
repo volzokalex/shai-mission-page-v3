@@ -196,13 +196,13 @@ body {
   overflow: hidden;
 }
 
-/* Slide 3: pixel text mission brief. Padding clears back button (top) + dots (bottom). */
+/* Slide 3: pixel text mission brief. Top padding clears back button. */
 .reel-slide.text {
-  padding: 60px 26px 34px;
+  padding: 60px 26px 22px;
   box-sizing: border-box;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 10px;
   color: var(--ivory);
   font-family: 'Jersey 25', var(--font-display);
   font-weight: 400;
@@ -210,12 +210,11 @@ body {
   overflow: hidden;
 }
 .reel-slide.text .brief-heading {
-  font-size: 14px;
-  line-height: 1.2;
+  font-family: 'Jersey 25', var(--font-display);
+  font-size: 22px;
+  line-height: 1.1;
   color: var(--primary-500);
-  letter-spacing: 0.08em;
-  font-family: var(--font-display);
-  font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .reel-slide.text .brief-body {
@@ -224,9 +223,9 @@ body {
   color: rgba(255, 250, 235, 0.92);
 }
 .reel-slide.text .brief-subheading {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.2;
-  color: var(--ivory);
+  color: var(--primary-500);
   margin-top: 2px;
 }
 .reel-slide.text .brief-list {
@@ -241,29 +240,30 @@ body {
   font-size: 17px;
   line-height: 1.25;
   color: rgba(255, 250, 235, 0.95);
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+  padding-left: 16px;
+  position: relative;
 }
-.reel-slide.text .brief-list li .check {
-  font-family: var(--font-display);
-  font-size: 12px;
-  flex: 0 0 auto;
+.reel-slide.text .brief-list li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary-500);
 }
 @media (max-height: 780px) {
-  .reel-slide.text { padding: 56px 22px 30px; gap: 7px; }
-  .reel-slide.text .brief-heading { font-size: 13px; }
+  .reel-slide.text { padding: 54px 22px 18px; gap: 8px; }
+  .reel-slide.text .brief-heading { font-size: 20px; }
   .reel-slide.text .brief-body { font-size: 16px; }
-  .reel-slide.text .brief-subheading { font-size: 16px; }
+  .reel-slide.text .brief-subheading { font-size: 18px; }
   .reel-slide.text .brief-list li { font-size: 15px; }
   .reel-slide.text .brief-list { gap: 3px; }
 }
 @media (max-height: 680px) {
-  .reel-slide.text { padding: 52px 20px 28px; gap: 6px; }
-  .reel-slide.text .brief-heading { font-size: 12px; }
+  .reel-slide.text { padding: 48px 20px 16px; gap: 6px; }
+  .reel-slide.text .brief-heading { font-size: 18px; }
   .reel-slide.text .brief-body { font-size: 14px; line-height: 1.2; }
-  .reel-slide.text .brief-subheading { font-size: 14px; }
-  .reel-slide.text .brief-list li { font-size: 13px; line-height: 1.2; }
+  .reel-slide.text .brief-subheading { font-size: 16px; }
+  .reel-slide.text .brief-list li { font-size: 13px; line-height: 1.2; padding-left: 14px; }
   .reel-slide.text .brief-list { gap: 2px; }
 }
 
@@ -360,40 +360,39 @@ body {
   z-index: 1;
 }
 
-/* Pagination dots — shows automatically based on slide count, DS 3D style */
+/* Pagination dots — sits in flow between hero block and body title */
 .reel-dots {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 14px;
   display: flex;
   justify-content: center;
-  gap: 8px;
-  z-index: 3;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0 10px;
   opacity: calc(1 - var(--scroll-progress, 0));
   pointer-events: auto;
 }
 
 .reel-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   padding: 0;
-  border: none;
+  border: 1px solid var(--border-subtle);
   border-radius: 50%;
   cursor: pointer;
-  /* Inactive: flat recessed "hole" — sharp inset cap, no blur, no bottom glow */
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, 0.55);
-  transform: translateY(2px);
+  /* Inactive: ivory surface with DS stack-shadow — matches inactive lesson button */
+  background: var(--neutral-0);
+  box-shadow: 0 2px 0 0 var(--neutral-300);
+  transition: transform 0.14s cubic-bezier(.2,.8,.2,1),
+              box-shadow 0.14s cubic-bezier(.2,.8,.2,1),
+              background 0.14s;
 }
 
 .reel-dot.active {
   /* Convex orange — DS button feel at micro scale */
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background: var(--primary-500);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 0 0 var(--primary-700);
+  border-color: transparent;
+  box-shadow: 0 3px 0 0 var(--primary-700);
 }
 
 /* Hero-title: terminal-style marquee visible only in collapsed state */
@@ -1099,17 +1098,12 @@ body {
               <p class="brief-body">Use Claude AI to analyze your Gmail and build a script that automatically sorts emails into labels — inbox clean, zero manual effort, runs on schedule.</p>
               <div class="brief-subheading">What you will get:</div>
               <ul class="brief-list">
-                <li><span class="check">✅</span>Working Gmail organizer script</li>
-                <li><span class="check">✅</span>Automated triggers — runs every hour</li>
-                <li><span class="check">✅</span>Clean inbox across multiple accounts</li>
-                <li><span class="check">✅</span>Workflow: analyze → design → automate → maintain</li>
+                <li>Working Gmail organizer script</li>
+                <li>Automated triggers — runs every hour</li>
+                <li>Clean inbox across multiple accounts</li>
+                <li>Workflow: analyze → design → automate → maintain</li>
               </ul>
             </div>
-          </div>
-          <div class="reel-dots" id="reelDots" role="tablist" aria-label="Slide">
-            <button class="reel-dot active" type="button" aria-label="Slide 1" data-slide="0"></button>
-            <button class="reel-dot" type="button" aria-label="Slide 2" data-slide="1"></button>
-            <button class="reel-dot" type="button" aria-label="Slide 3" data-slide="2"></button>
           </div>
           <div class="hero-title" aria-hidden="true">
             <span class="ht-marquee"><span class="ht-text">Gmail on Autopilot with Claude</span></span>
@@ -1119,6 +1113,13 @@ body {
         <button class="back-btn" aria-label="Back to Mission Map">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18 L9 12 L15 6"/></svg>
         </button>
+      </div>
+
+      <!-- Pagination dots between hero and body -->
+      <div class="reel-dots" id="reelDots" role="tablist" aria-label="Slide">
+        <button class="reel-dot active" type="button" aria-label="Slide 1" data-slide="0"></button>
+        <button class="reel-dot" type="button" aria-label="Slide 2" data-slide="1"></button>
+        <button class="reel-dot" type="button" aria-label="Slide 3" data-slide="2"></button>
       </div>
 
       <!-- Body -->
