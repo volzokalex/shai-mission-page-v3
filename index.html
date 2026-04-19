@@ -65,22 +65,22 @@
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
 
-  --hero-full: 500px;
+  --hero-full: 750px;
   --hero-min:  96px;
 }
 
 /* Responsive hero height — keep title + meta + artifact + CTA visible without scroll */
 @media (max-height: 900px) {
-  :root { --hero-full: 450px; }
+  :root { --hero-full: 675px; }
 }
 @media (max-height: 780px) {
-  :root { --hero-full: 390px; }
+  :root { --hero-full: 585px; }
 }
 @media (max-height: 680px) {
-  :root { --hero-full: 330px; }
+  :root { --hero-full: 495px; }
 }
 @media (max-height: 580px) {
-  :root { --hero-full: 280px; }
+  :root { --hero-full: 420px; }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
@@ -1399,10 +1399,8 @@ body {
 
       if (videoSlide && video && playBtn && soundBtn) {
         let hideTimer = null;
-        const HIDE_DELAY = 2000;
+        const HIDE_DELAY = 3000;
 
-        // Start muted so mobile autoplay is safe if ever needed; user turn on via sound btn.
-        // Default: unmute when user explicitly presses Play so sound comes through on first play.
         videoSlide.classList.add('muted');
         video.muted = true;
 
@@ -1417,26 +1415,30 @@ body {
         };
 
         const doPlay = () => {
-          // First user-initiated play: enable sound by default
+          showBtn();
           if (video.muted && !videoSlide.dataset.soundInitialized) {
             video.muted = false;
             videoSlide.classList.remove('muted');
             soundBtn.setAttribute('aria-pressed', 'true');
             videoSlide.dataset.soundInitialized = '1';
           }
-          const playPromise = video.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch((err) => {
-              // Browser blocked unmuted play: fall back to muted
-              video.muted = true;
-              videoSlide.classList.add('muted');
-              soundBtn.setAttribute('aria-pressed', 'false');
-              video.play().catch(() => {});
+          const p = video.play();
+          if (p && typeof p.catch === 'function') {
+            p.catch(() => {
+              if (!video.muted) {
+                video.muted = true;
+                videoSlide.classList.add('muted');
+                soundBtn.setAttribute('aria-pressed', 'false');
+                video.play().catch(() => {});
+              }
             });
           }
         };
 
-        const doPause = () => { video.pause(); };
+        const doPause = () => {
+          showBtn();
+          video.pause();
+        };
 
         video.addEventListener('play', () => {
           videoSlide.classList.add('playing');
@@ -1445,7 +1447,7 @@ body {
         });
         video.addEventListener('pause', () => {
           videoSlide.classList.remove('playing');
-          showBtn(); // stays visible while paused
+          showBtn();
         });
         video.addEventListener('ended', () => {
           videoSlide.classList.remove('playing');
@@ -1453,31 +1455,25 @@ body {
           try { video.currentTime = 0; } catch (e) {}
         });
 
-        // Play button click: toggle
         playBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           if (video.paused) doPlay(); else doPause();
         });
 
-        // Tap anywhere on video slide toggles play/pause (except sound btn — stops propagation)
         videoSlide.addEventListener('click', (e) => {
-          // ignore clicks on sound button or play button (handled above)
           if (e.target.closest('.sound-btn') || e.target.closest('.play-btn')) return;
           if (video.paused) doPlay(); else doPause();
         });
 
-        // Move within video while playing — show btn briefly (feel-good)
-        videoSlide.addEventListener('mousemove', () => {
-          if (!video.paused) { showBtn(); scheduleHide(); }
-        });
-
-        // Sound toggle
         soundBtn.addEventListener('click', (e) => {
           e.stopPropagation();
+          showBtn();
+          if (video.muted || video.paused) scheduleHide();
           video.muted = !video.muted;
           videoSlide.classList.toggle('muted', video.muted);
           soundBtn.setAttribute('aria-pressed', String(!video.muted));
           videoSlide.dataset.soundInitialized = '1';
+          if (!video.paused) scheduleHide();
         });
       }
     })();
