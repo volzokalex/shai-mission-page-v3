@@ -372,9 +372,7 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(255, 250, 235, 0.22);
   padding: 0;
-  background: rgba(0, 0, 0, 0.45);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.55);
   color: var(--ivory);
   display: flex;
   align-items: center;
@@ -386,7 +384,7 @@ body {
   transform: translateZ(0);
 }
 .reel-slide.video .sound-btn:hover {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   border-color: rgba(255, 250, 235, 0.35);
 }
 .reel-slide.video .sound-btn svg { width: 14px; height: 14px; }
@@ -1129,8 +1127,12 @@ body {
                 src="media/preview.mp4"
                 poster="media/preview-poster.jpg"
                 playsinline
+                webkit-playsinline
                 preload="metadata"
-                muted></video>
+                muted
+                disablePictureInPicture
+                disableRemotePlayback
+                x-webkit-airplay="deny"></video>
               <button type="button" class="sound-btn" id="soundBtn" aria-label="Toggle sound" aria-pressed="false">
                 <svg class="sound-on" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
                   <rect x="2" y="6" width="2" height="4" fill="currentColor"/>
