@@ -65,22 +65,22 @@
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
 
-  --hero-full: 750px;
+  --hero-full: 600px;
   --hero-min:  96px;
 }
 
 /* Responsive hero height — keep title + meta + artifact + CTA visible without scroll */
 @media (max-height: 900px) {
-  :root { --hero-full: 675px; }
+  :root { --hero-full: 540px; }
 }
 @media (max-height: 780px) {
-  :root { --hero-full: 585px; }
+  :root { --hero-full: 470px; }
 }
 @media (max-height: 680px) {
-  :root { --hero-full: 495px; }
+  :root { --hero-full: 400px; }
 }
 @media (max-height: 580px) {
-  :root { --hero-full: 420px; }
+  :root { --hero-full: 340px; }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
@@ -120,7 +120,6 @@ body {
   position: relative;
   min-height: 0;
   overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
 }
 .screen::-webkit-scrollbar { display: none; }
 .screen { -ms-overflow-style: none; scrollbar-width: none; }
@@ -139,6 +138,7 @@ body {
   overflow: visible;
   display: flex;
   z-index: 2;
+  will-change: height;
 }
 
 .hero-screen {
@@ -213,19 +213,21 @@ body {
 }
 .reel-slide.text .brief-heading {
   font-family: 'Jersey 25', var(--font-display);
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1.1;
   color: var(--primary-500);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .reel-slide.text .brief-body {
-  font-size: 20px;
+  font-size: 23px;
   line-height: 1.22;
   color: rgba(255, 250, 235, 0.92);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .reel-slide.text .brief-subheading {
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1.2;
   color: var(--primary-500);
   margin-top: 2px;
@@ -239,11 +241,13 @@ body {
   gap: 5px;
 }
 .reel-slide.text .brief-list li {
-  font-size: 19px;
+  font-size: 22px;
   line-height: 1.22;
   color: rgba(255, 250, 235, 0.95);
-  padding-left: 16px;
+  padding-left: 18px;
   position: relative;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .reel-slide.text .brief-list li::before {
   content: '>';
@@ -254,25 +258,25 @@ body {
 }
 @media (max-height: 900px) {
   .reel-slide.text { padding: 60px 24px 22px; gap: 9px; }
-  .reel-slide.text .brief-heading { font-size: 22px; }
-  .reel-slide.text .brief-body { font-size: 18px; }
-  .reel-slide.text .brief-subheading { font-size: 20px; }
-  .reel-slide.text .brief-list li { font-size: 17px; }
+  .reel-slide.text .brief-heading { font-size: 25px; }
+  .reel-slide.text .brief-body { font-size: 20px; }
+  .reel-slide.text .brief-subheading { font-size: 23px; }
+  .reel-slide.text .brief-list li { font-size: 19px; }
 }
 @media (max-height: 780px) {
   .reel-slide.text { padding: 58px 22px 20px; gap: 8px; }
-  .reel-slide.text .brief-heading { font-size: 20px; }
-  .reel-slide.text .brief-body { font-size: 16px; line-height: 1.2; }
-  .reel-slide.text .brief-subheading { font-size: 18px; }
-  .reel-slide.text .brief-list li { font-size: 15px; line-height: 1.2; padding-left: 14px; }
+  .reel-slide.text .brief-heading { font-size: 22px; }
+  .reel-slide.text .brief-body { font-size: 17px; line-height: 1.2; }
+  .reel-slide.text .brief-subheading { font-size: 20px; }
+  .reel-slide.text .brief-list li { font-size: 16px; line-height: 1.2; padding-left: 14px; }
   .reel-slide.text .brief-list { gap: 4px; }
 }
 @media (max-height: 680px) {
   .reel-slide.text { padding: 54px 20px 18px; gap: 7px; }
-  .reel-slide.text .brief-heading { font-size: 18px; }
-  .reel-slide.text .brief-body { font-size: 14px; line-height: 1.18; }
-  .reel-slide.text .brief-subheading { font-size: 16px; }
-  .reel-slide.text .brief-list li { font-size: 13px; line-height: 1.18; padding-left: 12px; }
+  .reel-slide.text .brief-heading { font-size: 19px; }
+  .reel-slide.text .brief-body { font-size: 15px; line-height: 1.18; }
+  .reel-slide.text .brief-subheading { font-size: 17px; }
+  .reel-slide.text .brief-list li { font-size: 14px; line-height: 1.18; padding-left: 12px; }
   .reel-slide.text .brief-list { gap: 3px; }
 }
 
@@ -312,14 +316,10 @@ body {
   object-fit: contain;
   background: #0f0c0a;
 }
-/* Hide iOS Safari's native play overlay so only our custom button shows. */
-.reel-slide.video .reel-video::-webkit-media-controls,
-.reel-slide.video .reel-video::-webkit-media-controls-panel,
-.reel-slide.video .reel-video::-webkit-media-controls-start-playback-button,
-.reel-slide.video .reel-video::-webkit-media-controls-overlay-play-button {
-  display: none !important;
-  -webkit-appearance: none !important;
-  opacity: 0 !important;
+/* On mobile we use native video controls for clarity; custom overlays hide. */
+@media (max-width: 500px) {
+  .reel-slide.video .play-btn,
+  .reel-slide.video .sound-btn { display: none; }
 }
 /* Video always full-height, contain (black bars on sides if aspect mismatch). */
 .reel-slide.video .play-btn {
@@ -1115,6 +1115,7 @@ body {
                 class="reel-video"
                 id="reelVideo"
                 src="media/preview.mp4"
+                poster="media/preview-poster.jpg"
                 playsinline
                 preload="metadata"
                 muted></video>
@@ -1411,7 +1412,14 @@ body {
       const playBtn = document.getElementById('playBtn');
       const soundBtn = document.getElementById('soundBtn');
 
-      if (videoSlide && video && playBtn && soundBtn) {
+      // Mobile: use native video controls (clear "this is a video" affordance).
+      // Custom pixel play-btn + sound-btn are hidden via CSS on ≤500px.
+      const isMobile = window.matchMedia('(max-width: 500px)').matches;
+      if (video && isMobile) {
+        video.setAttribute('controls', '');
+      }
+
+      if (videoSlide && video && playBtn && soundBtn && !isMobile) {
         let hideTimer = null;
         const HIDE_DELAY = 3000;
 
