@@ -345,11 +345,10 @@ body {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  /* Inactive: recessed "hole" look */
-  background: rgba(0, 0, 0, 0.45);
-  box-shadow:
-    inset 0 1px 1.5px rgba(0, 0, 0, 0.7),
-    0 1px 0 0 rgba(255, 255, 255, 0.06);
+  /* Inactive: flat recessed "hole" — sharp inset cap, no blur, no bottom glow */
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, 0.55);
+  transform: translateY(2px);
 }
 
 .reel-dot.active {
