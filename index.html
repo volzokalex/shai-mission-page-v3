@@ -1118,6 +1118,7 @@ body {
                 poster="media/preview-poster.jpg"
                 playsinline
                 preload="metadata"
+                controls
                 muted></video>
               <button type="button" class="sound-btn" id="soundBtn" aria-label="Toggle sound" aria-pressed="false">
                 <svg class="sound-on" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
@@ -1412,11 +1413,11 @@ body {
       const playBtn = document.getElementById('playBtn');
       const soundBtn = document.getElementById('soundBtn');
 
-      // Mobile: use native video controls (clear "this is a video" affordance).
-      // Custom pixel play-btn + sound-btn are hidden via CSS on ≤500px.
+      // Native video controls are always in HTML for mobile reliability.
+      // On desktop, remove them and use our custom pixel play-btn + sound-btn.
       const isMobile = window.matchMedia('(max-width: 500px)').matches;
-      if (video && isMobile) {
-        video.setAttribute('controls', '');
+      if (video && !isMobile) {
+        video.removeAttribute('controls');
       }
 
       if (videoSlide && video && playBtn && soundBtn && !isMobile) {
