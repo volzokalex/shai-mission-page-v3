@@ -65,22 +65,22 @@
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
 
-  --hero-full: 580px;
+  --hero-full: 500px;
   --hero-min:  96px;
 }
 
 /* Responsive hero height — keep title + meta + artifact + CTA visible without scroll */
 @media (max-height: 900px) {
-  :root { --hero-full: 520px; }
+  :root { --hero-full: 450px; }
 }
 @media (max-height: 780px) {
-  :root { --hero-full: 440px; }
+  :root { --hero-full: 390px; }
 }
 @media (max-height: 680px) {
-  :root { --hero-full: 370px; }
+  :root { --hero-full: 330px; }
 }
 @media (max-height: 580px) {
-  :root { --hero-full: 310px; }
+  :root { --hero-full: 280px; }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
@@ -318,7 +318,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 0 0 var(--primary-700);
+  box-shadow:
+    0 3px 0 0 var(--primary-700),
+    0 0 0 3px rgba(255, 250, 235, 0.14),
+    0 6px 16px rgba(0, 0, 0, 0.45);
   z-index: 2;
   cursor: pointer;
   transition: transform 0.12s, box-shadow 0.12s, opacity 0.25s ease;
@@ -349,18 +352,24 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid rgba(255, 250, 235, 0.22);
   padding: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   color: var(--ivory);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 3;
-  transition: background 0.14s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  transition: background 0.14s, border-color 0.14s;
 }
-.reel-slide.video .sound-btn:hover { background: rgba(0, 0, 0, 0.7); }
+.reel-slide.video .sound-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 250, 235, 0.35);
+}
 .reel-slide.video .sound-btn svg { width: 14px; height: 14px; }
 .reel-slide.video .sound-btn .sound-off { display: none; }
 .reel-slide.video.muted .sound-btn .sound-on { display: none; }
