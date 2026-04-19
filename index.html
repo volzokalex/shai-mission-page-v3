@@ -312,6 +312,15 @@ body {
   object-fit: contain;
   background: #0f0c0a;
 }
+/* Hide iOS Safari's native play overlay so only our custom button shows. */
+.reel-slide.video .reel-video::-webkit-media-controls,
+.reel-slide.video .reel-video::-webkit-media-controls-panel,
+.reel-slide.video .reel-video::-webkit-media-controls-start-playback-button,
+.reel-slide.video .reel-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+}
 /* Video always full-height, contain (black bars on sides if aspect mismatch). */
 .reel-slide.video .play-btn {
   width: 56px;
