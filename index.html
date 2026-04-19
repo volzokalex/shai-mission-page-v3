@@ -322,12 +322,11 @@ body {
   object-fit: contain;
   background: #0f0c0a;
 }
-/* Isolate the video's compositing layer at DOM level so z-index on sibling
-   buttons works normally (otherwise iOS layers its video above z-index siblings). */
-.reel-slide.video .reel-video {
-  transform: translateZ(0);
-}
-/* Video always full-height, contain (black bars on sides if aspect mismatch). */
+/* Promote play-btn and sound-btn to their own compositing layers so they stay
+   visible above iOS Safari's native video layer. translateZ(0) only — NO
+   will-change, so the browser manages layer lifecycle instead of holding GPU
+   memory permanently (which previously broke Start Mission / lesson button
+   animations after video playback). */
 .reel-slide.video .play-btn {
   width: 56px;
   height: 56px;
@@ -342,10 +341,15 @@ body {
   box-shadow: 0 3px 0 0 var(--primary-700);
   z-index: 2;
   cursor: pointer;
-  transition: opacity 0.25s ease;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.25s ease;
   position: relative;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  transform: translateZ(0);
+}
+.reel-slide.video .play-btn:active {
+  transform: translateZ(0) translateY(2px);
+  box-shadow: 0 1px 0 0 var(--primary-700);
 }
 .reel-slide.video .play-btn:focus { outline: none; }
 .reel-slide.video .play-btn:focus-visible { outline: none; box-shadow: 0 3px 0 0 var(--primary-700); }
@@ -379,6 +383,7 @@ body {
   z-index: 3;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   transition: background 0.14s, border-color 0.14s;
+  transform: translateZ(0);
 }
 .reel-slide.video .sound-btn:hover {
   background: rgba(0, 0, 0, 0.6);
