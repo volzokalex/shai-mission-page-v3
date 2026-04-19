@@ -144,7 +144,6 @@ body {
   overflow: visible;
   display: flex;
   z-index: 2;
-  will-change: height;
 }
 
 .hero-screen {
@@ -323,12 +322,10 @@ body {
   object-fit: contain;
   background: #0f0c0a;
 }
-/* Force custom buttons into their own compositing layer so iOS Safari's
-   video layer doesn't cover them (z-index is not enough on iOS). */
-.reel-slide.video .play-btn,
-.reel-slide.video .sound-btn {
+/* Isolate the video's compositing layer at DOM level so z-index on sibling
+   buttons works normally (otherwise iOS layers its video above z-index siblings). */
+.reel-slide.video .reel-video {
   transform: translateZ(0);
-  will-change: transform;
 }
 /* Video always full-height, contain (black bars on sides if aspect mismatch). */
 .reel-slide.video .play-btn {
