@@ -420,16 +420,15 @@ body {
 
 .ht-text {
   display: inline-block;
-  animation: ht-scroll 7.7s linear infinite;
+  animation: ht-scroll 12s linear infinite;
 }
 
 /* Letter-stepped scroll: ~2s each way with pixel-stepped motion, 3s pause at each extreme.
-   Translate value -140px is generous enough to bring the last letter fully into view
-   given Press Start 2P rendered glyph width at 11px font-size. */
+   Translate value tuned for Jersey 25 at 22px with ~60-char title; brings last letter into view. */
 @keyframes ht-scroll {
-  0%     { transform: translateX(0);      animation-timing-function: steps(20, end); }
-  20%    { transform: translateX(-140px); animation-timing-function: step-end; }
-  50%    { transform: translateX(-140px); animation-timing-function: steps(20, end); }
+  0%     { transform: translateX(0);      animation-timing-function: steps(40, end); }
+  20%    { transform: translateX(-360px); animation-timing-function: step-end; }
+  50%    { transform: translateX(-360px); animation-timing-function: steps(40, end); }
   70%    { transform: translateX(0);      animation-timing-function: step-end; }
   100%   { transform: translateX(0); }
 }
@@ -1103,7 +1102,7 @@ body {
             <button class="reel-dot" type="button" aria-label="Slide 3" data-slide="2"></button>
           </div>
           <div class="hero-title" aria-hidden="true">
-            <span class="ht-marquee"><span class="ht-text">The AI-Powered Gmail Autopilot</span></span>
+            <span class="ht-marquee"><span class="ht-text">Claude + Gmail Automation: Build Your Personal Email Autopilot</span></span>
             <span class="ht-caret"></span>
           </div>
         </div>
