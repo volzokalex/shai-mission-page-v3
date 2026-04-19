@@ -196,13 +196,15 @@ body {
   overflow: hidden;
 }
 
-/* Slide 3: pixel text mission brief. Vertically centered; top padding clears back button. */
+/* Slide 3: pixel text mission brief.
+   Rule: text MUST fit within block. Top padding clears back-btn (~66px from viewport top),
+   bottom padding keeps content off the block edge. Fonts scale with hero height. */
 .reel-slide.text {
-  padding: 60px 28px 24px;
+  padding: 64px 26px 24px;
   box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   color: var(--ivory);
   font-family: 'Jersey 25', var(--font-display);
   font-weight: 400;
@@ -211,19 +213,19 @@ body {
 }
 .reel-slide.text .brief-heading {
   font-family: 'Jersey 25', var(--font-display);
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.1;
   color: var(--primary-500);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .reel-slide.text .brief-body {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.22;
   color: rgba(255, 250, 235, 0.92);
 }
 .reel-slide.text .brief-subheading {
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.2;
   color: var(--primary-500);
   margin-top: 2px;
@@ -234,13 +236,13 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 .reel-slide.text .brief-list li {
-  font-size: 21px;
-  line-height: 1.25;
+  font-size: 19px;
+  line-height: 1.22;
   color: rgba(255, 250, 235, 0.95);
-  padding-left: 18px;
+  padding-left: 16px;
   position: relative;
 }
 .reel-slide.text .brief-list li::before {
@@ -250,20 +252,27 @@ body {
   top: 0;
   color: var(--primary-500);
 }
-@media (max-height: 680px) {
-  .reel-slide.text { padding: 54px 22px 20px; gap: 10px; }
+@media (max-height: 900px) {
+  .reel-slide.text { padding: 60px 24px 22px; gap: 9px; }
   .reel-slide.text .brief-heading { font-size: 22px; }
   .reel-slide.text .brief-body { font-size: 18px; }
   .reel-slide.text .brief-subheading { font-size: 20px; }
-  .reel-slide.text .brief-list li { font-size: 17px; padding-left: 16px; }
-  .reel-slide.text .brief-list { gap: 4px; }
+  .reel-slide.text .brief-list li { font-size: 17px; }
 }
-@media (max-height: 580px) {
-  .reel-slide.text { padding: 48px 20px 16px; gap: 8px; }
+@media (max-height: 780px) {
+  .reel-slide.text { padding: 58px 22px 20px; gap: 8px; }
   .reel-slide.text .brief-heading { font-size: 20px; }
   .reel-slide.text .brief-body { font-size: 16px; line-height: 1.2; }
   .reel-slide.text .brief-subheading { font-size: 18px; }
   .reel-slide.text .brief-list li { font-size: 15px; line-height: 1.2; padding-left: 14px; }
+  .reel-slide.text .brief-list { gap: 4px; }
+}
+@media (max-height: 680px) {
+  .reel-slide.text { padding: 54px 20px 18px; gap: 7px; }
+  .reel-slide.text .brief-heading { font-size: 18px; }
+  .reel-slide.text .brief-body { font-size: 14px; line-height: 1.18; }
+  .reel-slide.text .brief-subheading { font-size: 16px; }
+  .reel-slide.text .brief-list li { font-size: 13px; line-height: 1.18; padding-left: 12px; }
   .reel-slide.text .brief-list { gap: 3px; }
 }
 
@@ -318,23 +327,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 3px 0 0 var(--primary-700),
-    0 0 0 3px rgba(255, 250, 235, 0.14),
-    0 6px 16px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 3px 0 0 var(--primary-700);
   z-index: 2;
   cursor: pointer;
-  transition: transform 0.12s, box-shadow 0.12s, opacity 0.25s ease;
+  transition: opacity 0.25s ease;
   position: relative;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
-.reel-slide.video .play-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 0 0 var(--primary-700);
-}
-.reel-slide.video .play-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 0 var(--primary-700);
-}
+.reel-slide.video .play-btn:focus { outline: none; }
+.reel-slide.video .play-btn:focus-visible { outline: none; box-shadow: 0 3px 0 0 var(--primary-700); }
 .reel-slide.video .play-btn svg {
   width: 22px;
   height: 22px;
