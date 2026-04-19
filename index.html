@@ -65,22 +65,22 @@
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
 
-  --hero-full: 400px;
+  --hero-full: 480px;
   --hero-min:  96px;
 }
 
 /* Responsive hero height — keep title + meta + artifact + CTA visible without scroll */
 @media (max-height: 900px) {
-  :root { --hero-full: 380px; }
+  :root { --hero-full: 440px; }
 }
 @media (max-height: 780px) {
-  :root { --hero-full: 340px; }
+  :root { --hero-full: 380px; }
 }
 @media (max-height: 680px) {
-  :root { --hero-full: 300px; }
+  :root { --hero-full: 330px; }
 }
 @media (max-height: 580px) {
-  :root { --hero-full: 270px; }
+  :root { --hero-full: 290px; }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
@@ -360,39 +360,39 @@ body {
   z-index: 1;
 }
 
-/* Pagination dots — sits in flow between hero block and body title */
+/* Pagination dots — muted, sits in flow between hero block and body title */
 .reel-dots {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  padding: 14px 0 10px;
-  opacity: calc(1 - var(--scroll-progress, 0));
+  gap: 7px;
+  padding: 8px 0 2px;
+  opacity: calc((1 - var(--scroll-progress, 0)) * 0.75);
   pointer-events: auto;
 }
 
 .reel-dot {
-  width: 10px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
   padding: 0;
   border: 1px solid var(--border-subtle);
   border-radius: 50%;
   cursor: pointer;
-  /* Inactive: ivory surface with DS stack-shadow — matches inactive lesson button */
-  background: var(--neutral-0);
-  box-shadow: 0 2px 0 0 var(--neutral-300);
+  /* Inactive: muted neutral surface */
+  background: var(--neutral-200);
+  box-shadow: 0 1px 0 0 var(--neutral-300);
   transition: transform 0.14s cubic-bezier(.2,.8,.2,1),
               box-shadow 0.14s cubic-bezier(.2,.8,.2,1),
               background 0.14s;
 }
 
 .reel-dot.active {
-  /* Convex orange — DS button feel at micro scale */
-  width: 12px;
-  height: 12px;
-  background: var(--primary-500);
+  /* Active: muted primary — still indicates but doesn't steal focus */
+  width: 9px;
+  height: 9px;
+  background: var(--primary-300);
   border-color: transparent;
-  box-shadow: 0 3px 0 0 var(--primary-700);
+  box-shadow: 0 2px 0 0 var(--primary-500);
 }
 
 /* Hero-title: terminal-style marquee visible only in collapsed state */
@@ -636,7 +636,7 @@ body {
 /* ---------- Page body ---------- */
 
 .body {
-  padding: 12px 24px 0;
+  padding: 6px 24px 0;
 }
 
 .title {
