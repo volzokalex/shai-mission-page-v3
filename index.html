@@ -296,6 +296,8 @@ body {
   width: 56px;
   height: 56px;
   border-radius: 50%;
+  border: none;
+  padding: 0;
   background: var(--primary-500);
   color: var(--ivory);
   display: flex;
@@ -303,6 +305,16 @@ body {
   justify-content: center;
   box-shadow: 0 3px 0 0 var(--primary-700);
   z-index: 1;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.reel-slide.video .play-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 0 var(--primary-700);
+}
+.reel-slide.video .play-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 var(--primary-700);
 }
 .reel-slide.video .play-btn svg {
   width: 22px;
@@ -1047,6 +1059,18 @@ body {
       <div class="hero">
         <div class="hero-screen">
           <div class="reel-slider" id="reelSlider">
+            <div class="reel-slide video">
+              <button type="button" class="play-btn" id="playBtn" aria-label="Play preview">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+              </button>
+              <div class="video-caption">Watch the 30-sec preview</div>
+            </div>
+            <div class="reel-slide image">
+              <div class="image-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              </div>
+              <div class="image-caption">Inbox that sorts itself</div>
+            </div>
             <div class="reel-slide text">
               <div class="brief-heading">&gt; MISSION OUTCOMES</div>
               <ul class="brief-list">
@@ -1055,18 +1079,6 @@ body {
                 <li>Auto-follow-up rule for stalled threads</li>
                 <li>Reusable Inbox Playbook you keep</li>
               </ul>
-            </div>
-            <div class="reel-slide image">
-              <div class="image-badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-              </div>
-              <div class="image-caption">Inbox that sorts itself</div>
-            </div>
-            <div class="reel-slide video">
-              <div class="play-btn" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
-              </div>
-              <div class="video-caption">Watch the 30-sec preview</div>
             </div>
           </div>
           <div class="reel-dots" id="reelDots" role="tablist" aria-label="Slide">
@@ -1295,6 +1307,14 @@ body {
           slider.scrollTo({ left: i * slider.clientWidth, behavior: 'smooth' });
         });
       });
+
+      const playBtn = document.getElementById('playBtn');
+      if (playBtn) {
+        playBtn.addEventListener('click', () => {
+          document.dispatchEvent(new CustomEvent('reel:play', { detail: { slide: 'video' } }));
+          console.log('[reel] play preview');
+        });
+      }
     })();
   </script>
 </body>
