@@ -312,10 +312,7 @@ body {
   object-fit: contain;
   background: #0f0c0a;
 }
-/* Mobile: fill block, crop excess — no black bars in reels format */
-@media (max-width: 500px) {
-  .reel-slide.video .reel-video { object-fit: cover; }
-}
+/* Video always full-height, contain (black bars on sides if aspect mismatch). */
 .reel-slide.video .play-btn {
   width: 56px;
   height: 56px;
@@ -346,6 +343,15 @@ body {
 .reel-slide.video.playing .play-btn .icon-play { display: none; }
 .reel-slide.video.playing .play-btn .icon-pause { display: block; }
 .reel-slide.video.btn-hidden .play-btn { opacity: 0; pointer-events: none; }
+/* Mobile: nudge play-btn down ~20% of slide height from center. */
+@media (max-width: 500px) {
+  .reel-slide.video .play-btn {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 
 .reel-slide.video .sound-btn {
   position: absolute;
