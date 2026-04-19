@@ -89,15 +89,21 @@ html, body {
   font-family: var(--font-body);
   background: var(--surface-canvas);
   color: var(--text-body);
-  min-height: 100vh;
+  height: 100%;
   -webkit-text-size-adjust: 100%;
   touch-action: manipulation;
+  overscroll-behavior: none;
 }
+
+html { overflow: hidden; }
 
 body {
   display: flex;
   justify-content: center;
   padding: 0;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
 }
 
 .phone {
