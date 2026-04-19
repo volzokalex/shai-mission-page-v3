@@ -65,22 +65,22 @@
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
 
-  --hero-full: 480px;
+  --hero-full: 580px;
   --hero-min:  96px;
 }
 
 /* Responsive hero height — keep title + meta + artifact + CTA visible without scroll */
 @media (max-height: 900px) {
-  :root { --hero-full: 440px; }
+  :root { --hero-full: 520px; }
 }
 @media (max-height: 780px) {
-  :root { --hero-full: 380px; }
+  :root { --hero-full: 440px; }
 }
 @media (max-height: 680px) {
-  :root { --hero-full: 330px; }
+  :root { --hero-full: 370px; }
 }
 @media (max-height: 580px) {
-  :root { --hero-full: 290px; }
+  :root { --hero-full: 310px; }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
@@ -300,7 +300,7 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   background: #0f0c0a;
 }
 .reel-slide.video .play-btn {
@@ -340,24 +340,33 @@ body {
 
 .reel-slide.video .sound-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 34px;
-  height: 34px;
+  top: 28px;
+  right: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 10px;
   border: none;
   padding: 0;
-  background: rgba(0, 0, 0, 0.55);
-  color: var(--ivory);
+  background: var(--neutral-0);
+  color: var(--text-primary);
+  box-shadow: 0 2px 0 0 var(--neutral-300), inset 0 1px 0 rgba(255,255,255,1);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 3;
-  transition: background 0.14s;
+  transition: transform 0.12s cubic-bezier(.2,.8,.2,1),
+              box-shadow 0.12s cubic-bezier(.2,.8,.2,1);
 }
-.reel-slide.video .sound-btn:hover { background: rgba(0, 0, 0, 0.7); }
-.reel-slide.video .sound-btn svg { width: 18px; height: 18px; }
+.reel-slide.video .sound-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 0 var(--neutral-300), inset 0 1px 0 rgba(255,255,255,1);
+}
+.reel-slide.video .sound-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 0 var(--neutral-300), inset 0 1px 0 rgba(255,255,255,1);
+}
+.reel-slide.video .sound-btn svg { width: 14px; height: 14px; }
 .reel-slide.video .sound-btn .sound-off { display: none; }
 .reel-slide.video.muted .sound-btn .sound-on { display: none; }
 .reel-slide.video.muted .sound-btn .sound-off { display: block; }
@@ -1322,6 +1331,11 @@ body {
         const p = Math.round(clamped * 100) / 100;
         if (p !== lastP) {
           screen.style.setProperty('--scroll-progress', p);
+          // Pause video once hero starts collapsing meaningfully
+          if (p > 0.1 && lastP <= 0.1) {
+            const v = document.getElementById('reelVideo');
+            if (v && !v.paused) v.pause();
+          }
           lastP = p;
         }
         ticking = false;
@@ -1350,6 +1364,11 @@ body {
 
       const setActive = (i) => {
         if (i === activeIdx) return;
+        // Pause video when swiping away from slide 0 (video slide)
+        if (activeIdx === 0 && i !== 0) {
+          const v = document.getElementById('reelVideo');
+          if (v && !v.paused) v.pause();
+        }
         activeIdx = i;
         dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
       };
