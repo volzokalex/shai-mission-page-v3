@@ -1039,6 +1039,9 @@ body {
   }
 }
 
+/* iOS fix: eliminate 300ms tap delay and keep :active reliable on all buttons */
+button, a { touch-action: manipulation; }
+
 .sticky-cta {
   width: 100%;
   height: 60px;
@@ -1119,7 +1122,7 @@ body {
 .sticky-cta .arrow { width: 18px; height: 18px; }
 </style>
 </head>
-<body>
+<body ontouchstart="">
   <div class="phone" id="phone">
     <div class="screen">
       <!-- Hero preview -->
