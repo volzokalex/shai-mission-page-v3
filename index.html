@@ -352,15 +352,6 @@ body {
 .reel-slide.video.playing .play-btn .icon-play { display: none; }
 .reel-slide.video.playing .play-btn .icon-pause { display: block; }
 .reel-slide.video.btn-hidden .play-btn { opacity: 0; pointer-events: none; }
-/* Mobile: nudge play-btn down ~20% of slide height from center. */
-@media (max-width: 500px) {
-  .reel-slide.video .play-btn {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
 
 .reel-slide.video .sound-btn {
   position: absolute;
@@ -1026,6 +1017,12 @@ body {
   padding: 16px 20px calc(56px + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(to top, var(--surface-canvas) 60%, rgba(250,248,243,0));
   pointer-events: none;
+}
+/* Mobile: push Start Mission ~20% lower by shrinking bottom padding. */
+@media (max-width: 500px) {
+  .sticky-cta-wrap {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 .sticky-cta {
