@@ -196,29 +196,37 @@ body {
   overflow: hidden;
 }
 
-/* Slide 1: pixel text mission brief */
+/* Slide 3: pixel text mission brief. Padding clears back button (top) + dots (bottom). */
 .reel-slide.text {
-  padding: 20px 28px;
+  padding: 60px 26px 34px;
   box-sizing: border-box;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 12px;
+  gap: 8px;
   color: var(--ivory);
   font-family: 'Jersey 25', var(--font-display);
   font-weight: 400;
   align-items: stretch;
-  overflow-y: auto;
-}
-.reel-slide.text .brief-body {
-  font-size: 16px;
-  line-height: 1.25;
-  color: rgba(255, 250, 235, 0.88);
+  overflow: hidden;
 }
 .reel-slide.text .brief-heading {
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.2;
   color: var(--primary-500);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.reel-slide.text .brief-body {
+  font-size: 18px;
+  line-height: 1.22;
+  color: rgba(255, 250, 235, 0.92);
+}
+.reel-slide.text .brief-subheading {
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--ivory);
   margin-top: 2px;
 }
 .reel-slide.text .brief-list {
@@ -227,35 +235,36 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 .reel-slide.text .brief-list li {
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.25;
-  color: rgba(255, 250, 235, 0.92);
-  padding-left: 14px;
-  position: relative;
+  color: rgba(255, 250, 235, 0.95);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
-.reel-slide.text .brief-list li::before {
-  content: '>';
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: var(--primary-500);
+.reel-slide.text .brief-list li .check {
+  font-family: var(--font-display);
+  font-size: 12px;
+  flex: 0 0 auto;
 }
 @media (max-height: 780px) {
-  .reel-slide.text { padding: 16px 24px; gap: 10px; }
-  .reel-slide.text .brief-body { font-size: 14px; }
-  .reel-slide.text .brief-heading { font-size: 16px; }
-  .reel-slide.text .brief-list li { font-size: 14px; }
-  .reel-slide.text .brief-list { gap: 5px; }
+  .reel-slide.text { padding: 56px 22px 30px; gap: 7px; }
+  .reel-slide.text .brief-heading { font-size: 13px; }
+  .reel-slide.text .brief-body { font-size: 16px; }
+  .reel-slide.text .brief-subheading { font-size: 16px; }
+  .reel-slide.text .brief-list li { font-size: 15px; }
+  .reel-slide.text .brief-list { gap: 3px; }
 }
 @media (max-height: 680px) {
-  .reel-slide.text { padding: 14px 22px; gap: 8px; }
-  .reel-slide.text .brief-body { font-size: 13px; line-height: 1.22; }
-  .reel-slide.text .brief-heading { font-size: 15px; }
-  .reel-slide.text .brief-list li { font-size: 13px; line-height: 1.22; }
-  .reel-slide.text .brief-list { gap: 4px; }
+  .reel-slide.text { padding: 52px 20px 28px; gap: 6px; }
+  .reel-slide.text .brief-heading { font-size: 12px; }
+  .reel-slide.text .brief-body { font-size: 14px; line-height: 1.2; }
+  .reel-slide.text .brief-subheading { font-size: 14px; }
+  .reel-slide.text .brief-list li { font-size: 13px; line-height: 1.2; }
+  .reel-slide.text .brief-list { gap: 2px; }
 }
 
 /* Slide 2: image placeholder (gradient + icon) */
@@ -420,15 +429,15 @@ body {
 
 .ht-text {
   display: inline-block;
-  animation: ht-scroll 12s linear infinite;
+  animation: ht-scroll 8s linear infinite;
 }
 
 /* Letter-stepped scroll: ~2s each way with pixel-stepped motion, 3s pause at each extreme.
-   Translate value tuned for Jersey 25 at 22px with ~60-char title; brings last letter into view. */
+   Translate tuned for Jersey 25 at 22px with ~30-char title; brings last letter into view. */
 @keyframes ht-scroll {
-  0%     { transform: translateX(0);      animation-timing-function: steps(40, end); }
-  20%    { transform: translateX(-360px); animation-timing-function: step-end; }
-  50%    { transform: translateX(-360px); animation-timing-function: steps(40, end); }
+  0%     { transform: translateX(0);      animation-timing-function: steps(20, end); }
+  20%    { transform: translateX(-160px); animation-timing-function: step-end; }
+  50%    { transform: translateX(-160px); animation-timing-function: steps(20, end); }
   70%    { transform: translateX(0);      animation-timing-function: step-end; }
   100%   { transform: translateX(0); }
 }
@@ -636,9 +645,9 @@ body {
   padding-left: 14px;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 22px;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
 }
 
@@ -1086,13 +1095,14 @@ body {
               <div class="image-caption">Inbox that sorts itself</div>
             </div>
             <div class="reel-slide text">
-              <p class="brief-body">In this hands-on lesson, you will use Claude AI to analyze your Gmail inbox and build a script that automatically sorts emails into labels — keeping your inbox clean without manual effort. You will write a universal Google Apps Script that works for multiple accounts, with smart rate limiting and safety checks. By the end, you will have a fully automated email system running on a schedule.</p>
-              <div class="brief-heading">&gt; WHAT YOU WILL GET</div>
+              <div class="brief-heading">MISSION INFO</div>
+              <p class="brief-body">Use Claude AI to analyze your Gmail and build a script that automatically sorts emails into labels — inbox clean, zero manual effort, runs on schedule.</p>
+              <div class="brief-subheading">What you will get:</div>
               <ul class="brief-list">
-                <li>Working Gmail organizer script</li>
-                <li>Automated triggers — runs every hour</li>
-                <li>Clean inbox across multiple accounts</li>
-                <li>Repeatable workflow: analyze → design → automate → maintain</li>
+                <li><span class="check">✅</span>Working Gmail organizer script</li>
+                <li><span class="check">✅</span>Automated triggers — runs every hour</li>
+                <li><span class="check">✅</span>Clean inbox across multiple accounts</li>
+                <li><span class="check">✅</span>Workflow: analyze → design → automate → maintain</li>
               </ul>
             </div>
           </div>
@@ -1102,7 +1112,7 @@ body {
             <button class="reel-dot" type="button" aria-label="Slide 3" data-slide="2"></button>
           </div>
           <div class="hero-title" aria-hidden="true">
-            <span class="ht-marquee"><span class="ht-text">Claude + Gmail Automation: Build Your Personal Email Autopilot</span></span>
+            <span class="ht-marquee"><span class="ht-text">Gmail on Autopilot with Claude</span></span>
             <span class="ht-caret"></span>
           </div>
         </div>
@@ -1113,7 +1123,7 @@ body {
 
       <!-- Body -->
       <div class="body">
-        <h1 class="title">Claude + Gmail Automation: Build Your Personal Email Autopilot</h1>
+        <h1 class="title">Gmail on Autopilot with Claude</h1>
         <div class="info-card">
           <div class="meta-strip" role="list">
             <span class="meta-chip difficulty" role="listitem" title="Builder mission">
