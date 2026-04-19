@@ -347,25 +347,16 @@ body {
   border-radius: 10px;
   border: none;
   padding: 0;
-  background: var(--neutral-0);
-  color: var(--text-primary);
-  box-shadow: 0 2px 0 0 var(--neutral-300), inset 0 1px 0 rgba(255,255,255,1);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--ivory);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 3;
-  transition: transform 0.12s cubic-bezier(.2,.8,.2,1),
-              box-shadow 0.12s cubic-bezier(.2,.8,.2,1);
+  transition: background 0.14s;
 }
-.reel-slide.video .sound-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 0 0 var(--neutral-300), inset 0 1px 0 rgba(255,255,255,1);
-}
-.reel-slide.video .sound-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 0 0 var(--neutral-300), inset 0 1px 0 rgba(255,255,255,1);
-}
+.reel-slide.video .sound-btn:hover { background: rgba(0, 0, 0, 0.7); }
 .reel-slide.video .sound-btn svg { width: 14px; height: 14px; }
 .reel-slide.video .sound-btn .sound-off { display: none; }
 .reel-slide.video.muted .sound-btn .sound-on { display: none; }
