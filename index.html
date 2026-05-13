@@ -1196,7 +1196,7 @@ button, a { touch-action: manipulation; }
             <span class="ht-caret"></span>
           </div>
         </div>
-        <button class="back-btn" aria-label="Back to Mission Map">
+        <button class="back-btn" id="backBtn" type="button" aria-label="Back to Mission Map">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18 L9 12 L15 6"/></svg>
         </button>
       </div>
@@ -1354,6 +1354,10 @@ button, a { touch-action: manipulation; }
     </div>
   </div>
   <script>
+    // Back button — return to the Mission Map prototype on GitHub Pages.
+    document.getElementById('backBtn')?.addEventListener('click', () => {
+      window.location.href = 'https://volzokalex.github.io/sqills-mission-map/';
+    });
     (function () {
       const screen = document.querySelector('.screen');
       if (!screen) return;
