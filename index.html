@@ -1356,7 +1356,19 @@ button, a { touch-action: manipulation; }
   <script>
     // Back button — return to the Mission Map prototype on GitHub Pages.
     document.getElementById('backBtn')?.addEventListener('click', () => {
-      window.location.href = 'https://volzokalex.github.io/sqills-mission-map/';
+      // Detect which Mission Map version sent us here, return to the same one.
+      // Falls back to v1 (the original prototype) when referrer is unknown
+      // (e.g. direct URL open) so existing v1 flows keep working unchanged.
+      const ref = document.referrer || '';
+      let target;
+      if (ref.includes('sqills-mission-map-v2')) {
+        target = 'https://volzokalex.github.io/sqills-mission-map-v2/';
+      } else if (ref.includes('sqills-mission-map')) {
+        target = 'https://volzokalex.github.io/sqills-mission-map/';
+      } else {
+        target = 'https://volzokalex.github.io/sqills-mission-map/';
+      }
+      window.location.href = target;
     });
     (function () {
       const screen = document.querySelector('.screen');
