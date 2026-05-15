@@ -1361,7 +1361,9 @@ button, a { touch-action: manipulation; }
       // (e.g. direct URL open) so existing v1 flows keep working unchanged.
       const ref = document.referrer || '';
       let target;
-      if (ref.includes('sqills-mission-map-v2')) {
+      if (ref.includes('sqills-mission-map-v3')) {
+        target = 'https://volzokalex.github.io/sqills-mission-map-v3/';
+      } else if (ref.includes('sqills-mission-map-v2')) {
         target = 'https://volzokalex.github.io/sqills-mission-map-v2/';
       } else if (ref.includes('sqills-mission-map')) {
         target = 'https://volzokalex.github.io/sqills-mission-map/';
